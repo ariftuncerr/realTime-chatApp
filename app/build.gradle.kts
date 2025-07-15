@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
+
 }
 
 android {
@@ -45,4 +47,22 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    // ViewModel, LiveData
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.9.1")
+
+    // Navigation Component
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.9.1")
+    implementation( "androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    // Hilt (dependency injection)
+    implementation ("com.google.dagger:hilt-android:2.51")
+    kapt ("com.google.dagger:hilt-compiler:2.51")
+    implementation ("androidx.hilt:hilt-navigation-fragment:1.2.0")
+
+    // Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 }
