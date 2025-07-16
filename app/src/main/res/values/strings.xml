@@ -1,5 +1,40 @@
 <resources>
-    <string name="app_name">realTime-chatApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">RealTime Chat App</string>
+
+    <!-- Primary Colors -->
+    <color name="primary">#415f91</color>
+    <color name="on_primary">#ffffff</color>
+    <color name="primary_container">#d6e3ff</color>
+    <color name="on_primary_container">#284777</color>
+
+    <!-- Secondary Colors -->
+    <color name="secondary">#565f71</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary_container">#dae2f9</color>
+    <color name="on_secondary_container">#3e4759</color>
+
+    <!-- Tertiary Colors -->
+    <color name="tertiary">#705575</color>
+    <color name="on_tertiary">#FFFFFF</color>
+    <color name="tertiary_container">#fad8fd</color>
+    <color name="on_tertiary_container">#573e5c</color>
+
+    <!-- Error Colors -->
+    <color name="error">#ba1a1a</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="error_container">#ffdad6</color>
+    <color name="on_error_container">#93000a</color>
+
+    <!-- Surface / Background -->
+    <color name="surface">#f9f9ff</color>
+    <color name="on_surface">#d9d9e0</color>
+    <color name="surface_dim">#E0E0E0</color>
+    <color name="surface_bright">#f9f9ff</color>
+    <color name="surface_container">#ededf4</color>
+
+    <!-- Inverse Colors -->
+    <color name="inverse_surface">#2e3036</color>
+    <color name="inverse_on_surface">#f0f0f7</color>
+    <color name="inverse_primary">#aac7ff</color>
+
 </resources>

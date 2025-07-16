@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Material Button -->
+    <style name="Widget.realTimeChatApp.Button" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- CardView -->
+    <style name="Widget.realTimeChatApp.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/primary_container</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardCornerRadius">12dp</item>
+    </style>
+
+    <!-- TextInputLayout -->
+    <style name="Widget.realTimeChatApp.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="hintTextColor">@color/on_primary_container</item>
+        <item name="helperTextTextColor">@color/on_primary_container</item>
+    </style>
+
+    <!-- TextInputEditText -->
+    <style name="Widget.realTimeChatApp.TextInputEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textColorHint">@color/on_surface</item>
+    </style>
+
+</resources>
