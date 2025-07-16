@@ -37,4 +37,7 @@
     <color name="inverse_on_surface">#f0f0f7</color>
     <color name="inverse_primary">#aac7ff</color>
 
+    <string name="default_web_client_id">1065073006631-3cuc1ue1bf59vsjl7jhukhf9c13ugo3r.apps.googleusercontent.com</string>
+
+
 </resources>

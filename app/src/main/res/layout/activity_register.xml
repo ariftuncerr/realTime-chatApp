@@ -5,13 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_backround"
     tools:context=".ui.auth.RegisterActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_backround"
         tools:context=".ui.auth.LoginActivity">
 
         <TextView
@@ -52,7 +52,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameEditTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:hint="Name" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +70,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surnameEditTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:hint="Surname" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +88,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEditTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:hint="Email" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,17 +106,18 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passEditTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:hint="Password" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/loginBtn"
+                android:id="@+id/registerBtn"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
+                android:onClick="register"
                 android:text="Register"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -131,32 +132,22 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+                app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/LoginWithGoogleBtn"
+                android:id="@+id/registerWithGoogleBtn"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
+                android:onClick="register"
                 android:text="Register With Google"
                 app:icon="@drawable/googleg_standard_color_18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/orTxt" />
 
-            <TextView
-                android:id="@+id/notRegisteredTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Not Registered Click Here"
-                android:textColor="@color/on_secondary_container"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LoginWithGoogleBtn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

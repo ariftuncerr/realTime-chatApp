@@ -1,9 +1,17 @@
+import org.jetbrains.kotlin.fir.declarations.builder.buildScript
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     alias(libs.plugins.google.gms.google.services)
 
+}
+buildscript {
+    dependencies {
+        classpath ("com.android.tools.build:gradle:8.3.2")
+        classpath ("com.google.gms:google-services:4.4.3")
+    }
 }
 
 android {
@@ -36,6 +44,8 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+
     buildFeatures {
         viewBinding = true
     }
@@ -74,4 +84,11 @@ dependencies {
     // Coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+
+    //Firebase
+    implementation (platform("com.google.firebase:firebase-bom:33.16.0"))
+    implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ("com.google.android.gms:play-services-auth:21.3.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:25.1.4")
+
 }

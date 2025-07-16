@@ -46,7 +46,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditTxt"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:hint="Email" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +64,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passEditTxt"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:hint="Password" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,6 +75,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
+            android:onClick="login"
             android:text="Login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,6 +99,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
+            android:onClick="login"
             android:text="Login With Google"
             app:icon="@drawable/googleg_standard_color_18"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,6 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:clickable="true"
             android:text="Not Registered Click Here"
             android:textColor="@color/on_secondary_container"
             android:textSize="18sp"
