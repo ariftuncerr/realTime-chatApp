@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1065073006631",
+    "project_id": "realtime-chatapp-71c74",
+    "storage_bucket": "realtime-chatapp-71c74.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065073006631:android:0fada644ac39aefb361602",
+        "android_client_info": {
+          "package_name": "com.ariftuncer.realtime_chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtaeZU6EKbW_H0dN-HBensU2rPOmnbP6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
