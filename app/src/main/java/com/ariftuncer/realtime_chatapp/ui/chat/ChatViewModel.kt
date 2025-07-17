@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ariftuncer.realtime_chatapp.data.model.Message
-import com.ariftuncer.realtime_chatapp.data.repository.MessageRepository
+import com.ariftuncer.realtime_chatapp.data.repository.ChatRepository
 
 class ChatViewModel : ViewModel() {
 
-    private val repository = MessageRepository()
+    private val repository = ChatRepository()
 
     private val _messages = MutableLiveData<List<Message>>()
     val messages: LiveData<List<Message>> = _messages

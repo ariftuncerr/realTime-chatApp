@@ -9,18 +9,19 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ariftuncer.realtime_chatapp.data.model.Chat
 import com.ariftuncer.realtime_chatapp.databinding.FragmentMessagesBinding
 import com.ariftuncer.realtime_chatapp.ui.adapters.ChatAdapter
 import com.ariftuncer.realtime_chatapp.ui.chat.ChatActivity
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MessagesFragment : Fragment() {
 
     private lateinit var binding: FragmentMessagesBinding
     private val mainViewModel: MainViewModel by activityViewModels()
-
     private lateinit var chatAdapter: ChatAdapter
 
     override fun onCreateView(
@@ -41,7 +42,7 @@ class MessagesFragment : Fragment() {
     private fun setupRecyclerView() {
         chatAdapter = ChatAdapter(emptyList()) { chat ->
             val intent = Intent(requireContext(), ChatActivity::class.java)
-            intent.putExtra("friendUid", chat.uid) // Chat modeline göre
+            intent.putExtra("friendUid", chat.uid)
             intent.putExtra("friendName", chat.friendName)
             startActivity(intent)
         }
@@ -51,18 +52,22 @@ class MessagesFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        mainViewModel.chatList.observe(viewLifecycleOwner) { list ->
-            chatAdapter.updateList(list)
+        lifecycleScope.launch {
+            mainViewModel.chatList.collectLatest { list ->
+                chatAdapter.updateList(list)
+            }
         }
 
-        mainViewModel.addChatResult.observe(viewLifecycleOwner) { (success, message) ->
-            if (success) {
-                Toast.makeText(requireContext(), "Arkadaş eklendi", Toast.LENGTH_SHORT).show()
-                binding.newFriendClayout.visibility = View.GONE
-                binding.friendIdEditTxt.text?.clear()
-                binding.friendNameEditTxt.text?.clear()
-            } else {
-                Toast.makeText(requireContext(), "Hata: $message", Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch {
+            mainViewModel.addChatResult.collectLatest { (success, message) ->
+                if (success) {
+                    Toast.makeText(requireContext(), "Arkadaş eklendi", Toast.LENGTH_SHORT).show()
+                    binding.newFriendClayout.visibility = View.GONE
+                    binding.friendIdEditTxt.text?.clear()
+                    binding.friendNameEditTxt.text?.clear()
+                } else {
+                    Toast.makeText(requireContext(), "Hata: $message", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
