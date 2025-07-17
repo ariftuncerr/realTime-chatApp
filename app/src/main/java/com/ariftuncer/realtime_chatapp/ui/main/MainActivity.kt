@@ -1,5 +1,6 @@
 package com.ariftuncer.realtime_chatapp.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.ariftuncer.realtime_chatapp.R
 import com.ariftuncer.realtime_chatapp.databinding.ActivityMainBinding
 import com.ariftuncer.realtime_chatapp.ui.auth.AuthViewModel
+import com.ariftuncer.realtime_chatapp.ui.auth.LoginActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -51,14 +53,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu,menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.log_out -> authViewModel.logout()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
+        return if (item.itemId == R.id.log_out) {
+            authViewModel.logout()
+            val intent = Intent(this, LoginActivity :: class.java)
+            startActivity(intent)
+            true
+        } else {
+            false
+        }
+    }
 }

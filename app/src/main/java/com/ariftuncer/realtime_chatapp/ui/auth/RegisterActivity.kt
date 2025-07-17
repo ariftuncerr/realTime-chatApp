@@ -35,6 +35,7 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
 
+        authViewModel.logout()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(com.ariftuncer.realtime_chatapp.R.string.default_web_client_id))
