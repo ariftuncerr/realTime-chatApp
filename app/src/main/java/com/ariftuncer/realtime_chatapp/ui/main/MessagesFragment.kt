@@ -1,60 +1,87 @@
 package com.ariftuncer.realtime_chatapp.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ariftuncer.realtime_chatapp.R
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ariftuncer.realtime_chatapp.data.model.Chat
+import com.ariftuncer.realtime_chatapp.databinding.FragmentMessagesBinding
+import com.ariftuncer.realtime_chatapp.ui.adapters.ChatAdapter
+import com.ariftuncer.realtime_chatapp.ui.chat.ChatActivity
+import com.google.android.material.snackbar.Snackbar
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MessagesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MessagesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentMessagesBinding
+    private val mainViewModel: MainViewModel by activityViewModels()
+
+    private lateinit var chatAdapter: ChatAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_messages, container, false)
+    ): View {
+        binding = FragmentMessagesBinding.inflate(inflater, container, false)
+
+        setupRecyclerView()
+        observeViewModel()
+        setupUIEvents()
+
+        mainViewModel.loadChatList()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MessagesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MessagesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun setupRecyclerView() {
+        chatAdapter = ChatAdapter(emptyList()) { chat ->
+            val intent = Intent(requireContext(), ChatActivity::class.java)
+            intent.putExtra("friendUid", chat.uid) // Chat modeline göre
+            intent.putExtra("friendName", chat.friendName)
+            startActivity(intent)
+        }
+
+        binding.chatsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.chatsRecyclerView.adapter = chatAdapter
+    }
+
+    private fun observeViewModel() {
+        mainViewModel.chatList.observe(viewLifecycleOwner) { list ->
+            chatAdapter.updateList(list)
+        }
+
+        mainViewModel.addChatResult.observe(viewLifecycleOwner) { (success, message) ->
+            if (success) {
+                Toast.makeText(requireContext(), "Arkadaş eklendi", Toast.LENGTH_SHORT).show()
+                binding.newFriendClayout.visibility = View.GONE
+                binding.friendIdEditTxt.text?.clear()
+                binding.friendNameEditTxt.text?.clear()
+            } else {
+                Toast.makeText(requireContext(), "Hata: $message", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun setupUIEvents() {
+        binding.newFriendBtn.setOnClickListener {
+            binding.newFriendClayout.visibility =
+                if (binding.newFriendClayout.isVisible) View.GONE else View.VISIBLE
+        }
+
+        binding.addFriendBtn.setOnClickListener {
+            val friendUid = binding.friendIdEditTxt.text.toString().trim()
+            val friendName = binding.friendNameEditTxt.text.toString().trim()
+
+            if (friendUid.isNotEmpty() && friendName.isNotEmpty()) {
+                mainViewModel.addChat(friendUid, friendName)
+            } else {
+                Snackbar.make(binding.root, "Lütfen UID ve isim giriniz", Snackbar.LENGTH_SHORT).show()
+            }
+        }
     }
 }
