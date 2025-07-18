@@ -34,4 +34,14 @@ class MainViewModel : ViewModel() {
             }
         }
     }
+
+    fun deleteChat(friendUid: String) {
+        viewModelScope.launch {
+            val result = repository.deleteChat(friendUid)
+            if (result.first) {
+                loadChatList() // listeyi yenile
+            }
+        }
+    }
+
 }

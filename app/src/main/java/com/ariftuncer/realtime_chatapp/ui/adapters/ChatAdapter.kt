@@ -13,13 +13,15 @@ import com.ariftuncer.realtime_chatapp.data.model.Chat
 
 class ChatAdapter(
     private var chatList: List<Chat>,
-    private val onItemClick: (Chat) -> Unit
+    private val onItemClick: (Chat) -> Unit,
+   // private val onDeleteClick: (Chat) -> Unit
 ) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
 
     inner class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val chatCard: CardView = itemView.findViewById(R.id.chatCard)
         val chatProfile: ImageButton = itemView.findViewById(R.id.chatProfileBtn)
         val chatName: TextView = itemView.findViewById(R.id.chatNameTxt)
+        val deleteButton: ImageButton = itemView.findViewById(R.id.deleteChatBtn)
 
         fun bind(chat: Chat) {
             chatName.text = chat.friendName
@@ -27,9 +29,10 @@ class ChatAdapter(
             chatCard.setOnClickListener {
                 onItemClick(chat)
             }
+           /* deleteButton.setOnClickListener {
+                onDeleteClick(chat)
+            }*/
 
-            chatProfile.setOnClickListener {
-            }
         }
     }
 

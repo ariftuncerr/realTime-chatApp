@@ -36,6 +36,31 @@ class MessagesRepository {
         awaitClose { listener.remove() }
     }.catch { emit(emptyList()) }
 
+    suspend fun deleteChat(friendUid: String): Pair<Boolean, String?> {
+        val currentUid = auth.currentUser?.uid ?: return false to "Oturum bulunamadı"
+        return try {
+            // 1. Kullanıcının chat listesinden sil
+            firestore.collection("users")
+                .document(currentUid)
+                .collection("chats")
+                .document(friendUid)
+                .delete()
+                .await()
+
+            // 2. direct_messages/chatId içeriğini sil
+            val chatId = if (currentUid < friendUid) "${currentUid}_$friendUid" else "${friendUid}_$currentUid"
+            firestore.collection("direct_messages")
+                .document(chatId)
+                .delete()
+                .await()
+
+            true to null
+        } catch (e: Exception) {
+            false to e.message
+        }
+    }
+
+
     fun addChat(friendUid: String, friendName: String): Flow<Pair<Boolean, String?>> = flow {
         val currentUid = auth.currentUser?.uid ?: run {
             emit(false to "Kullanıcı oturumu yok")
