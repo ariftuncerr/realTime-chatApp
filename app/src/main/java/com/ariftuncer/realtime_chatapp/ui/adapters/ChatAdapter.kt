@@ -29,7 +29,6 @@ class ChatAdapter(
             }
 
             chatProfile.setOnClickListener {
-                // Profil butonuna özel bir işlem yapılacaksa buraya
             }
         }
     }

@@ -23,7 +23,7 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Chat başlatılacak UID alınıyor
+        // Chat başlatılacak UID
         friendUid = intent.getStringExtra("friendUid") ?: ""
 
         setupRecyclerView()

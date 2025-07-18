@@ -44,8 +44,8 @@ class MessagesRepository {
 
         val currentUserName = auth.currentUser?.displayName ?: "Sen"
 
-        val currentUserChat = Chat(friendUid, friendName)
-        val friendUserChat = Chat(currentUid, currentUserName)
+        val currentUserChat = Chat(uid = friendUid, friendName = friendName, profile = null)
+        val friendUserChat = Chat(uid = currentUid, friendName = currentUserName, profile = null)
 
         val userRef = firestore.collection("users")
 
